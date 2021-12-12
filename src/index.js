@@ -12,8 +12,10 @@ const authRoute = require("./routers/auth");
 const app = express();
 
 // Connect mongoose DB
-mongoose.connect(process.env.DB_CONNECTION, () =>
-  console.log("Connected to DB")
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => console.log("Connected to DB")
 );
 
 // Middleware
