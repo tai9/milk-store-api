@@ -18,11 +18,11 @@
     "express": "^4.17.1",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.14"
+    "mongoose": "^6.0.14",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "node-sass": "^6.0.1",
-    "nodemon": "^2.0.15"
+    "node-sass": "^6.0.1"
   }
 }
