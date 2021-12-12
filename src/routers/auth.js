@@ -44,8 +44,16 @@ router.post("/login", async (req, res) => {
   if (!validPass)
     return res.status(401).send({ message: "Email or password is invalid" });
 
-  const token = jwt.sign({ _id: userExist._id }, process.env.TOKEN_SECRET);
-  res.header("Authorization").send({ access_token: token });
+  const expiredAt = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
+  const token = jwt.sign(
+    { _id: userExist._id, iat: expiredAt },
+    process.env.TOKEN_SECRET
+  );
+  res.header("Authorization").send({
+    name: userExist.name,
+    access_token: token,
+    expiredAt,
+  });
 });
 
 module.exports = router;
