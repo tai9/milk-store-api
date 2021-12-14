@@ -6,8 +6,9 @@ const cors = require("cors");
 require("dotenv/config");
 
 // Import Routes
-const postsRoute = require("./routers/post");
+const productsRoute = require("./routers/products");
 const authRoute = require("./routers/auth");
+const verifyToken = require("./routers/verifyToken");
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use(express.json());
 
 // Route middlewares
 app.use("/api/user", authRoute);
-app.use("/api/posts", postsRoute);
+app.use("/api/products", verifyToken, productsRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello api");
