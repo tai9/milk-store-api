@@ -36,15 +36,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 const Product = require("../models/Product");
 const { productValidation } = require("../validations/product");
+const pagination = require("../middlewares/pagination");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", pagination(Product), async (req, res) => {
   try {
-    const data = await Product.find();
-    res.json(data);
+    res.json(res.result);
   } catch (err) {
-    res.status(500);
+    res.status(500).json({ message: err.message });
   }
 });
 

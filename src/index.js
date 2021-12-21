@@ -8,7 +8,7 @@ require("dotenv/config");
 // Import Routes
 const productsRoute = require("./routers/products");
 const authRoute = require("./routers/auth");
-const verifyToken = require("./routers/verifyToken");
+const verifyToken = require("./middlewares/verifyToken");
 
 const app = express();
 
