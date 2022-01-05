@@ -33,6 +33,18 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const orderExist = await Order.findById(id);
+    res.json(orderExist);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const orderExist = await Order.findById(id);
