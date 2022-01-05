@@ -7,6 +7,7 @@ require("dotenv/config");
 
 // Import Routes
 const productsRoute = require("./routers/products");
+const ordersRoute = require("./routers/orders");
 const authRoute = require("./routers/auth");
 const verifyToken = require("./middlewares/verifyToken");
 
@@ -28,6 +29,7 @@ app.use(express.json());
 // Route middlewares
 app.use("/api/user", authRoute);
 app.use("/api/products", verifyToken, productsRoute);
+app.use("/api/orders", verifyToken, ordersRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello api");
