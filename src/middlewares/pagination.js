@@ -17,7 +17,12 @@ module.exports = function (model) {
     }
 
     try {
-      const data = await model.find().limit(limit).skip(startIndex).exec();
+      const data = await model
+        .find({ ...req.query })
+        .limit(limit)
+        .skip(startIndex)
+        .sort({ created_date: -1 })
+        .exec();
       res.result = {
         data,
         pagination: {
