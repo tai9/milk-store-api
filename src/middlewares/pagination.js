@@ -17,14 +17,14 @@ module.exports = function (model) {
     }
 
     let query = { ...req.query };
-    if (query.created_date) {
-      query.created_date = {
-        $gte: req.query.created_date,
+    if (query.createdDate) {
+      query.createdDate = {
+        $gte: req.query.createdDate,
       };
     }
-    if (query.expiry_date) {
-      query.expiry_date = {
-        $gte: req.query.expiry_date,
+    if (query.expiryDate) {
+      query.expiryDate = {
+        $gte: req.query.expiryDate,
       };
     }
 
@@ -33,7 +33,7 @@ module.exports = function (model) {
         .find(query)
         .limit(limit)
         .skip(startIndex)
-        .sort({ created_date: -1 })
+        .sort({ createdDate: -1 })
         .exec();
       res.result = {
         data,

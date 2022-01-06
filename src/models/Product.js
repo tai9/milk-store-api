@@ -21,15 +21,15 @@ const ProductSchema = mongoose.Schema({
     type: String,
     default: "Active",
   },
-  expiry_date: {
+  expiryDate: {
     type: Date,
     default: new Date(+new Date() + 6 * 30 * 24 * 60 * 60 * 1000),
   },
-  created_date: {
+  createdDate: {
     type: Date,
     default: Date.now,
   },
-  updated_date: {
+  updatedDate: {
     type: Date,
     default: Date.now,
   },

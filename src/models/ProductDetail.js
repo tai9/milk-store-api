@@ -21,11 +21,11 @@ const ProductDetailSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  created_date: {
+  createdDate: {
     type: Date,
     default: Date.now,
   },
-  updated_date: {
+  updatedDate: {
     type: Date,
     default: Date.now,
   },

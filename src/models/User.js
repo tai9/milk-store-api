@@ -19,11 +19,11 @@ const userSchema = mongoose.Schema({
     min: 6,
     max: 1024,
   },
-  created_date: {
+  createdDate: {
     type: Date,
     default: Date.now,
   },
-  updated_date: {
+  updatedDate: {
     type: Date,
     default: Date.now,
   },
