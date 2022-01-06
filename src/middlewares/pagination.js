@@ -19,12 +19,17 @@ module.exports = function (model) {
     let query = { ...req.query };
     if (query.createdDate) {
       query.createdDate = {
-        $gte: req.query.createdDate,
+        $gte: query.createdDate,
       };
     }
     if (query.expiryDate) {
       query.expiryDate = {
-        $gte: req.query.expiryDate,
+        $gte: query.expiryDate,
+      };
+    }
+    if (query.name) {
+      query.name = {
+        $regex: query.name,
       };
     }
 
