@@ -49,7 +49,7 @@ router.get("/", pagination(Product), async (req, res) => {
 });
 
 router.post("/", upload.single("productImage"), async (req, res) => {
-  const url = await uploadFile(req.file.path, req.file.filename);
+  const url = await uploadFile(req.file?.path, req.file?.filename);
   const data = {
     ...req.body,
     preview: url,

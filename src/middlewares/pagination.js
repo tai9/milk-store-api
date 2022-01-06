@@ -16,9 +16,21 @@ module.exports = function (model) {
       res.status(400).json({ message: "page out of range" });
     }
 
+    let query = { ...req.query };
+    if (query.created_date) {
+      query.created_date = {
+        $gte: req.query.created_date,
+      };
+    }
+    if (query.expiry_date) {
+      query.expiry_date = {
+        $gte: req.query.expiry_date,
+      };
+    }
+
     try {
       const data = await model
-        .find({ ...req.query })
+        .find(query)
         .limit(limit)
         .skip(startIndex)
         .sort({ created_date: -1 })

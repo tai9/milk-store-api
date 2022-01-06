@@ -21,6 +21,10 @@ const ProductSchema = mongoose.Schema({
     type: String,
     default: "Active",
   },
+  expiry_date: {
+    type: Date,
+    default: new Date(+new Date() + 6 * 30 * 24 * 60 * 60 * 1000),
+  },
   created_date: {
     type: Date,
     default: Date.now,
