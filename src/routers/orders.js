@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 const { orderValidation } = require("../validations/order");
 const pagination = require("../middlewares/pagination");
 
@@ -26,6 +27,17 @@ router.post("/", async (req, res) => {
   const post = new Order(data);
   try {
     const order = await post.save();
+
+    (async () => {
+      const { products } = req.body;
+      for (const product of products) {
+        const { _id, amount } = product;
+        const p = await Product.findById(_id);
+        p.quantity -= amount;
+        await p.save();
+      }
+    })();
+
     res.json(order);
   } catch (err) {
     console.log(err);

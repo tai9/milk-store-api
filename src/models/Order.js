@@ -9,7 +9,7 @@ const OrderSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  quantity: {
+  totalAmount: {
     type: Number,
     required: true,
   },
@@ -19,7 +19,7 @@ const OrderSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    default: "processing",
+    default: "Processing",
   },
   products: {
     type: Array,

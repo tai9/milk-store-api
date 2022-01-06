@@ -2,9 +2,9 @@ const Joi = require("joi");
 
 const orderValidation = (data) => {
   const schema = Joi.object({
-    name: Joi.string(),
+    customerName: Joi.string(),
+    totalAmount: Joi.number().required(),
     totalPayment: Joi.number().required(),
-    quantity: Joi.number().required(),
   }).unknown();
   return schema.validate(data);
 };
