@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 });
 
 const getTotalPaymentByMonth = (data) => {
-  let months = Array.from(Array(11)).fill(0);
+  let months = Array.from(Array(12)).fill(0);
   let total = 0;
   data.forEach((order) => {
     const monthIndex = new Date(order.createdDate).getMonth();
