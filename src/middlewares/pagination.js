@@ -32,6 +32,11 @@ module.exports = function (model) {
         $regex: query.name,
       };
     }
+    if (query.seqId) {
+      query.seqId = {
+        $regex: query.seqId,
+      };
+    }
 
     try {
       const data = await model
