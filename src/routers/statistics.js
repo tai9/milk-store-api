@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     let totalEarning = 0;
 
     result.forEach((order) => {
-      totalEarning += order.totalEarning;
+      totalEarning += order.totalPayment;
     });
 
     const resJson = {
