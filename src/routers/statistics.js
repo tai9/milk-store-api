@@ -13,15 +13,15 @@ router.get("/", async (req, res) => {
     }
 
     const result = await Order.find({ status: "Completed" });
-    let totalPayment = 0;
+    let totalEarning = 0;
 
     result.forEach((order) => {
-      totalPayment += order.totalPayment;
+      totalEarning += order.totalEarning;
     });
 
     const resJson = {
-      totalPayment,
-      orderCount: result.length,
+      totalEarning,
+      totalOrder: result.length,
     };
     myCache.set("statistics", resJson);
     res.json(resJson);
