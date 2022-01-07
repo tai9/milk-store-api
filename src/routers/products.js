@@ -48,28 +48,45 @@ router.get("/", pagination(Product), async (req, res) => {
   }
 });
 
-router.post("/", upload.single("productImage"), async (req, res) => {
-  const url = await uploadFile(req.file?.path, req.file?.filename);
-  const data = {
-    ...req.body,
-    preview: url,
-  };
-  const { error } = productValidation(data);
-  if (error) return res.status(400).send({ message: error.details[0].message });
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
 
-  const productExist = await Product.findOne({ name: req.body.name });
-  if (productExist)
-    return res.status(400).send({ message: "Product already exist" });
-
-  const post = new Product(data);
   try {
-    const product = await post.save();
-    res.json(product);
+    const result = await Product.findById(id);
+    res.json(result);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+router.post(
+  "/",
+  // upload.single("productImage"),
+  async (req, res) => {
+    // const url = await uploadFile(req.file?.path, req.file?.filename);
+    // const data = {
+    //   ...req.body,
+    //   preview: url,
+    // };
+    const { error } = productValidation(req.body);
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
+
+    const productExist = await Product.findOne({ name: req.body.name });
+    if (productExist)
+      return res.status(400).send({ message: "Product already exist" });
+
+    const post = new Product(req.body);
+    try {
+      const product = await post.save();
+      res.json(product);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+);
 
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
