@@ -9,6 +9,8 @@ require("dotenv/config");
 const productsRoute = require("./routers/products");
 const ordersRoute = require("./routers/orders");
 const authRoute = require("./routers/auth");
+const statisticsRoute = require("./routers/statistics");
+
 const verifyToken = require("./middlewares/verifyToken");
 
 const app = express();
@@ -30,6 +32,7 @@ app.use(express.json());
 app.use("/api/user", authRoute);
 app.use("/api/products", verifyToken, productsRoute);
 app.use("/api/orders", verifyToken, ordersRoute);
+app.use("/api/statistics", verifyToken, statisticsRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello api");
