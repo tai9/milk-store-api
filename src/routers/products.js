@@ -71,22 +71,12 @@ router.post("/", upload.single("productImage"), async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   const { id } = req.params;
-  const productExist = await Product.findById(id);
-  if (!productExist)
-    return res.status(400).send({ message: "Product not found" });
-
-  const { error } = productValidation(req.body);
-  if (error) return res.status(400).send({ message: error.details[0].message });
-
-  productExist.name = req.body.name;
-  productExist.price = req.body.price;
-  productExist.quantity = req.body.quantity;
 
   try {
-    const data = await productExist.save();
-    res.json(data);
+    await Product.findByIdAndUpdate(id, req.body);
+    res.json({ message: "success" });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
