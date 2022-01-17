@@ -51,6 +51,8 @@ router.post("/login", async (req, res) => {
   );
   res.header("Authorization").send({
     name: userExist.name,
+    email: userExist.email,
+    role: userExist.role,
     access_token: token,
     expiredAt,
   });
